@@ -27,7 +27,7 @@ public class AbstractDAO {
 		
 		String url = "jdbc:postgresql://localhost/postgres";
 		String usr = "postgres";
-		String psw = "postgres";
+		String psw = "lolit0";
 		try {
 			connection = DriverManager.getConnection(url, usr, psw);
 		} catch (SQLException e) {
