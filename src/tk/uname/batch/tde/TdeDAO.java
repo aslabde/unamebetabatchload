@@ -51,7 +51,6 @@ public class TdeDAO extends AbstractDAO {
 		sql = new StringBuffer(" CREATE TABLE futboluname.market ")
 			.append(" ( ")
 			.append( " s_day INTEGER, ")
-			.append( " p_owner INTEGER, ")
 			.append( " player INTEGER, ")
 			.append( " sell_prize INTEGER, ")
 			.append( " CONSTRAINT market_pk PRIMARY KEY (player) ")
@@ -128,8 +127,8 @@ public class TdeDAO extends AbstractDAO {
 		closePreparedStatement();
 		
 		//CARGAMOS DATOS EN MARKET SOLO PARA DESARROLLO:
-		 sql = new StringBuffer(" INSERT INTO futboluname.market (s_day, p_owner, player, sell_prize) ")
-			.append(" SELECT 20150901 as s_day, 0 as p_owner, id as player, ")
+		 sql = new StringBuffer(" INSERT INTO futboluname.market (s_day, player, sell_prize) ")
+			.append(" SELECT 20150901 as s_day, id as player, ")
 			.append(" market_value as sell_prize ")
 			.append(" FROM futboluname.player ")
 			.append(" WHERE real_team IN (5,7) ")
