@@ -17,8 +17,9 @@ public class Launcher {
 		
 		List<Player> playersList = loader.loadPlayerList();
 		dao.openConnection();
-		//dao.loadTable(playersList);
 		dao.createTables();
+		dao.loadTables(playersList);
+	
 	}
 
 }
