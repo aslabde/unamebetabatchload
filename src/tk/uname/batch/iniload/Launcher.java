@@ -19,6 +19,7 @@ public class Launcher {
 		dao.openConnection();
 		dao.createTables();
 		dao.loadTables(playersList);
+		dao.loadTestTables();
 	
 	}
 

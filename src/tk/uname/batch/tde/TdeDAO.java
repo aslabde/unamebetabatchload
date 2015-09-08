@@ -62,27 +62,6 @@ public class TdeDAO extends AbstractDAO {
 		executeInsertStatement();
 		closePreparedStatement();	
 		
-	/*	//Player
-		sql = new StringBuffer(" CREATE TABLE futboluname.player ")
-			.append(" id INTEGER, ")
-			.append( " pl_name VARCHAR(30), ")
-			.append( " real_team INTEGER, ")
-			.append( " user_team INTEGER, ")
-			.append( " field_position INTEGER, ")
-			.append( " market_value INTEGER, ")
-			.append( " points INTEGER, ")
-			.append( " updated_market_value INTEGER, ")
-			.append( " updated_points INTEGER, ")
-			.append( " CONSTRAINT player_pk PRIMARY KEY (id) ")
-			;
-		
-		preparedStatement = createPreparedStatement(sql
-				.toString());
-			
-		executeInsertStatement();
-		closePreparedStatement();	
-		*/
-		
 	}
 	
 	public void loadTables(List<Player> playersList) throws SQLException {
@@ -148,20 +127,86 @@ public class TdeDAO extends AbstractDAO {
 		
 		closePreparedStatement();
 		
+		//TACTIC
+		sql = new StringBuffer("")
+			.append(" INSERT INTO futboluname.tactic ")
+			.append(" VALUES (1,'4-4-2') ")
+		;
+		preparedStatement = createPreparedStatement(sql
+				.toString());
+		executeInsertStatement();
+		
+		closePreparedStatement();	
+	}
+	
+	public void loadTestTables() throws SQLException{
+		
 		//CARGAMOS DATOS EN MARKET SOLO PARA DESARROLLO:
-		 sql = new StringBuffer(" INSERT INTO futboluname.market (s_day, player, sell_prize) ")
+		StringBuffer sql = new StringBuffer(" INSERT INTO futboluname.market (s_day, player, sell_prize) ")
 			.append(" SELECT 20150901 as s_day, id as player, ")
 			.append(" market_value as sell_prize ")
 			.append(" FROM futboluname.player ")
 			.append(" WHERE real_team IN (5,7) ")
 			.append(" AND ID BETWEEN 118 AND 157 ")
 			;
-			 preparedStatement = createPreparedStatement(sql
+		PreparedStatement preparedStatement = createPreparedStatement(sql
 					.toString());
-			executeInsertStatement();
+		executeInsertStatement();
 			
-			closePreparedStatement();
-			
+		closePreparedStatement();
+		
+		
+		//CARGAMOS USER1
+		sql = new StringBuffer("")
+			.append(" INSERT INTO futboluname.user ")
+			.append(" VALUES(1,20000000,'usuario1',10,'Mi equipo 1', 1) ")
+		;
+		preparedStatement = createPreparedStatement(sql
+				.toString());
+		executeInsertStatement();
+		
+		closePreparedStatement();
+		
+		//CARGAMOS USER2
+		sql = new StringBuffer("")
+			.append(" INSERT INTO futboluname.user ")
+			.append(" VALUES(2,20000000,'usuario2',20,'Mi equipo 2', 1) ")
+		;
+		preparedStatement = createPreparedStatement(sql
+				.toString());
+		executeInsertStatement();
+		
+		closePreparedStatement();
+		
+		
+		//CARGAMOS DATOS 1 EN LA TABLA USER_TEAM:
+		sql = new StringBuffer("")
+			.append(" INSERT INTO futboluname.user_team ")
+			.append(" (id, user_id, player_id, eleven_position) ")
+			.append(" SELECT id, 1, id, 0  ")
+			.append(" FROM futboluname.player ")
+			.append(" WHERE ID IN (7,51,58,235,284) ")
+		;
+		preparedStatement = createPreparedStatement(sql
+				.toString());
+		executeInsertStatement();
+		
+		closePreparedStatement();
+		
+		//CARGAMOS DATOS 2 EN LA TABLA USER_TEAM:
+		sql = new StringBuffer("")
+			.append(" INSERT INTO futboluname.user_team ")
+			.append(" (id, user_id, player_id, eleven_position) ")
+			.append(" SELECT id, 2, id, 0  ")
+			.append(" FROM futboluname.player ")
+			.append(" WHERE ID IN (27,43,53,110) ")
+		;
+		preparedStatement = createPreparedStatement(sql
+				.toString());
+		executeInsertStatement();
+		
+		closePreparedStatement();
+		
 	}
 	
 }
